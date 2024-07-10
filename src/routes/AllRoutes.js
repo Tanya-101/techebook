@@ -4,7 +4,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 
 export const AllRoutes = () => {
   return (
-    <>
+    
     <Routes>
         <Route path="/" element={<HomePage/>}/>
         <Route path="/products" element={<ProductsList/>}/>
@@ -16,6 +16,6 @@ export const AllRoutes = () => {
         <Route path="/dashboard" element={<ProtectedRoute><DashboardPage/></ProtectedRoute>}></Route>
         <Route path="*" element={<PageNotFound/>}/>
     </Routes>
-    </>
+    
   )
 }

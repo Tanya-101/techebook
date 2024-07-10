@@ -17,7 +17,7 @@ export const Register = () => {
   async function handleRegister(event) {
     event.preventDefault();
     try{
-      const authDetail = {                          //post request
+      const authDetail = {                        
         name: name.current.value,
         email: email.current.value,
         password: password.current.value
