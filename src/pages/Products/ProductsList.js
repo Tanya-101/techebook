@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useTitle } from "../../hooks/useTitle";
-
 import { ProductCard, Spinner } from "../../components/";
 import { FilterBar } from "./components/FilterBar";
-
 import { useFilter } from "../../context";
 import { getProductList } from "../../services";
 

@@ -1,5 +1,3 @@
-// import { BiSolidQuoteLeft } from "react-icons/bi";
-// import { BiSolidQuoteRight } from "react-icons/bi";
 
 export const TestimonialCard = (props) => {
     let review = props.review;
