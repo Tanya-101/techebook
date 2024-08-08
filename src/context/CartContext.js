@@ -1,5 +1,4 @@
-import { createContext, useContext } from "react";
-import { useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 import { cartReducer } from "../reducers";
 
 const cartInitialState = {
@@ -30,7 +29,6 @@ export const CartProvider = ({children}) => {
     const removeFromCart = (product) => {
 
         const updatedTotal = state.total-product.price;
-
         
         const updatedCart = state.cartList.filter(current => current.id !== product.id);
         

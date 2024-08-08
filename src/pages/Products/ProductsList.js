@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useTitle } from "../../hooks/useTitle";
-import { ProductCard, Spinner } from "../../components/";
+import { ProductCard } from "../../components/";
 import { FilterBar } from "./components/FilterBar";
 import { useFilter } from "../../context";
 import { getProductList } from "../../services";
 
 export const ProductsList = () => {
 
-  const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const { products, initialProductList } = useFilter();
   const [filter, setFilter] = useState(false);
@@ -21,7 +20,6 @@ export const ProductsList = () => {
 
   useEffect(() => {
     async function fetchProducts() {
-      setLoading(true);
       try {
         const data = await getProductList(searchTerm);
         initialProductList(data);
@@ -29,7 +27,6 @@ export const ProductsList = () => {
       } catch (error) {
         setErrorMessage(error)
       }
-      setLoading(false);
     }
     fetchProducts();
   }, [searchTerm]); //eslint-disable-line
@@ -50,10 +47,11 @@ export const ProductsList = () => {
           ) :
 
             (<div className="flex flex-wrap justify-center lg:flex-row">
-              {loading ? (<Spinner />) : (
+              {
                 products.map((product) => (
                   <ProductCard key={product.id} product={product} />
-                )))}
+                ))
+              }
             </div>
             )
         }

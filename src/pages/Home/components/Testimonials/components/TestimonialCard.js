@@ -4,15 +4,7 @@ export const TestimonialCard = (props) => {
   return (
     <div className="flex flex-col relative">
 
-        <div className="absolute -top-[7rem] z-[10] mx-auto">
-            <img className="aspect-square rounded-full w-[160px] h-[160px] z-[25]"
-             src={review.image} alt="user" />
-
-            <div className='w-[160px] h-[160px] bg-violet-500 rounded-full absolute top-[-10px] z-[-2] left-[10px]'></div>
-
-        </div>
-
-        <div className="text-center mt-7">
+        <div className="text-center">
             <p className="font-bold text-2xl capitalize tracking-wider dark:text-gray-200 mb-3">{review.name}</p>
             <p className="text-violet-300 uppercase text-sm">{review.job}</p>
         </div>

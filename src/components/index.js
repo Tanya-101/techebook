@@ -8,5 +8,4 @@ export { DropdownLoggedIn } from "./Elements/DropdownLoggedIn";
 export { DropdownLoggedOut } from "./Elements/DropdownLoggedOut";
 
 
-export { ScrollToTop } from "./Other/ScrollToTop"
-export { Spinner } from "./Other/Spinner";
+export { ScrollToTop } from "./Other/ScrollToTop";
