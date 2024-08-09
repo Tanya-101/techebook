@@ -2,7 +2,7 @@ function getSession(){
     const token = JSON.parse(sessionStorage.getItem("token"));
     const tbid = JSON.parse(sessionStorage.getItem("tbid"));
 
-    return {token: token, id: tbid};
+    return {token, tbid};
 }
 
 export async function getUser(){
@@ -15,7 +15,7 @@ export async function getUser(){
     }
     const response = await fetch(`${process.env.REACT_APP_HOST}/600/users/${browserData.id}`, requestOptions);
     if(!response.ok){
-        throw ( response.statusText);
+        throw { message: response.statusText, status: response.status }; //eslint-disable-line
     }
     const data = await response.json();
     return data;
@@ -32,7 +32,7 @@ export async function getUserOrders(){
 
     const response = await fetch(`${process.env.REACT_APP_HOST}/660/orders?users.id=${browserData.id}`, requestOptions );
     if(!response.ok){
-        throw (response.statusText);
+        throw { message: response.statusText, status: response.status }; //eslint-disable-line
     }
     const data = await response.json();
     return data;
@@ -66,7 +66,7 @@ export async function createOrder(cartList,total,user){
 
     const response = await fetch(`${process.env.REACT_APP_HOST}/660/orders`, requestOptions);
     if(!response.ok){
-        throw (response.statusText)
+        throw { message: response.statusText, status: response.status }; //eslint-disable-line
     }
     const data = await response.json();
     return data;  

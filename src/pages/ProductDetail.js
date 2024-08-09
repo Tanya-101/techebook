@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useTitle } from "../hooks/useTitle";
 import { Rating } from "../components/";
 import { useCart } from "../context";
 import { getProduct } from "../services";
 
 export const ProductDetail = () => {
-    const [errorMessage, setErrorMessage] = useState("");
     const [product, setProduct] = useState({});
     const { id } = useParams();
     const { cartList, addToCart, removeFromCart } = useCart();
@@ -30,13 +30,12 @@ export const ProductDetail = () => {
             try {
                 const data = await getProduct(id);
                 setProduct(data);
-                setErrorMessage("ok");
             } catch (error) {
-                setErrorMessage(error);
+                toast.error(error.message, {closeButton: true, position: "bottom-center" });
             }
         }
         fetchProduct()
-    }, []) // eslint-disable-line
+    }, [id]) 
 
 
     function addHandle() {
@@ -49,12 +48,6 @@ export const ProductDetail = () => {
 
     return (
         <main className="dark:bg-slate-800">
-            {
-                (errorMessage && errorMessage !== "ok") ? (
-                    <section>
-                        <div className="text-center mt-10 dark:text-white text-4xl"><span>Sorry, Server Error - {errorMessage}!</span></div>
-                    </section>
-                ) : (
                     <section>
                         <h1 className="mt-10 mb-5 text-4xl text-center font-bold text-gray-900 dark:text-slate-200">{product.name}</h1>
 
@@ -84,10 +77,7 @@ export const ProductDetail = () => {
                                 <p className="mt-3 text-lg text-gray-900 dark:text-slate-200">{product.long_description}</p>
                             </div>
                         </div>
-
                     </section>
-                )
-            }
         </main>
     )
 }

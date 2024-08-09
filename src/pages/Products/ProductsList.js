@@ -1,31 +1,30 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useTitle } from "../../hooks/useTitle";
+
 import { ProductCard } from "../../components/";
 import { FilterBar } from "./components/FilterBar";
+
 import { useFilter } from "../../context";
 import { getProductList } from "../../services";
+import { toast } from "react-toastify";
 
 export const ProductsList = () => {
 
-  const [errorMessage, setErrorMessage] = useState("");
   const { products, initialProductList } = useFilter();
   const [filter, setFilter] = useState(false);
   const search = useLocation().search;
   const searchTerm = new URLSearchParams(search).get("q");
 
-
   useTitle("Explore eBooks Collection");
-
 
   useEffect(() => {
     async function fetchProducts() {
       try {
         const data = await getProductList(searchTerm);
         initialProductList(data);
-        setErrorMessage("ok");
       } catch (error) {
-        setErrorMessage(error)
+        toast.error(error.message, {closeButton: true, position: "bottom-center" });
       }
     }
     fetchProducts();
@@ -40,21 +39,15 @@ export const ProductsList = () => {
             <i className="text-gray-500 dark:border-gray-600 dark:hover:text-gray-600 dark:hover:border-gray-600  text-3xl bg- bi bi-filter-square-fill"></i>
           </button>
         </div>
+
+        <div className="flex flex-wrap justify-center lg:flex-row">
         {
+          products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))
+          }
+        </div>
 
-          (errorMessage !== "ok") ? (
-            <div className="dark:text-white text-4xl"><span>Sorry, Server Error - {errorMessage}!</span></div>
-          ) :
-
-            (<div className="flex flex-wrap justify-center lg:flex-row">
-              {
-                products.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))
-              }
-            </div>
-            )
-        }
       </section>
       {filter && <FilterBar setFilter={setFilter} />}
     </main>

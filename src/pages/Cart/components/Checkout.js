@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useCart } from "../../../context";
+import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { createOrder,getUser } from "../../../services";
 
 export const Checkout = ({ setCheckout }) => {
 
-    const [errorMessage, setErrorMessage] = useState("");
     const { cartList, clearCart, total } = useCart();
     const [user, setUser] = useState({});
 
@@ -16,9 +16,8 @@ export const Checkout = ({ setCheckout }) => {
             try{
             const data = await getUser();
             setUser(data);
-            setErrorMessage("ok");
             }catch(error){
-                setErrorMessage(error);
+                toast.error(error.message, { closeButton: true, position: "bottom-center" });
             }
         }
         fetchData();
@@ -30,23 +29,13 @@ export const Checkout = ({ setCheckout }) => {
         try {
             const data = await createOrder(cartList,total,user);
             clearCart();
-            setErrorMessage("ok");
             navigate("/order-summary", { state: { data: data, status: true } });
         } catch (error) {
-            setErrorMessage(error);
             navigate("/order-summary", { state: { status: false } });
         }
     }
 
     return (
-        <>
-        {
-                (errorMessage && errorMessage !== "ok") ? (
-                    <section>
-                        <div className="text-center mt-10 dark:text-white text-4xl"><span>Sorry, Server Error - {errorMessage}! Please Re-Login.</span></div>
-                    </section>
-                ) : (
-        
         <section>
             <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50">
                 <div className="fixed top-0 right-0 left-0 z-50 w-full flex items-center justify-center md:h-full mt-5 overflow-y-auto overflow-x-hidden ">
@@ -95,8 +84,5 @@ export const Checkout = ({ setCheckout }) => {
 
             </div>
         </section>
-                )
-            }
-        </>
     )
 }
