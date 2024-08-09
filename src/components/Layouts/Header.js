@@ -37,7 +37,7 @@ export const Header = () => {
 
           <Link to="/" className="flex items-center ">
             <img src={Logo} className="h-10" alt="TechEbook Logo" />
-            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white font-serif">TechEbook</span>
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white font-serif hidden sm:block">TechEbook</span>
           </Link>
 
           <div className="flex items-center relative">
