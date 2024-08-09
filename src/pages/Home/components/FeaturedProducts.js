@@ -18,8 +18,6 @@ export const FeaturedProducts = () => {
     fetchProducts();
   }, [])
   return (
-    <>
-    
       <section className="mt-8">
         <h1 className="text-2xl text-center font-semibold dark:text-slate-100 mb-5 underline underline-offset-8">Featured eBooks</h1>
         <div className="flex flex-wrap justify-center lg:flex-row">
@@ -29,9 +27,7 @@ export const FeaturedProducts = () => {
           ))
 
         }
-
         </div>
       </section>
-    </>
   )
 }

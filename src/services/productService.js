@@ -17,7 +17,7 @@ export async function getProduct(id){
 }
 
 export async function getFeaturedList(){
-    const response = await fetch("http://localhost:8000/444/featured_products");
+    const response = await fetch(`${process.env.REACT_APP_HOST}/444/featured_products`);
     if(!response.ok){
         throw ( response.statusText);
     }
