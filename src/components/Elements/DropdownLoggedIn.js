@@ -13,6 +13,7 @@ export const DropdownLoggedIn = ({ setDropdown }) => {
         async function fetchData() {
             try {
                 const data = await getUser();
+                console.log('user data : ',data);
                 data.email ? setUser(data) : handleLogout();
             } catch (error) {
                 toast.error(error.message, { closeButton: true, position: "bottom-center" });

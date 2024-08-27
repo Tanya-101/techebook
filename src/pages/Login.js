@@ -29,10 +29,18 @@ export const Login = () => {
 
     }
 
+    async function handleLoginGuest() {
+        email.current.value = process.env.REACT_APP_GUEST_LOGIN;
+        password.current.value = process.env.REACT_APP_GUEST_PASSWORD;
+
+        const data = await login();
+        data.accessToken ? Navigate("/products") : toast.error(data);
+    }
+
     return (
         <main className="dark:bg-slate-800">
             <h1 className="mt-6 font-bold text-2xl text-center underline underline-offset-8 text-gray-800 dark:text-gray-200">Login</h1>
-        
+
             <form onSubmit={handleLogin}>
                 <div className="mb-6">
                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
@@ -44,6 +52,7 @@ export const Login = () => {
                 </div>
                 <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Log In</button>
             </form>
+            {/* <button onClick={handleLoginGuest} className="mt-3 cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:righ-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login As Guest</button>  */}
         </main>
     )
 }

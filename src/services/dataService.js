@@ -13,7 +13,7 @@ export async function getUser(){
         method: "GET",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${browserData.token}` }
     }
-    const response = await fetch(`${process.env.REACT_APP_HOST}/600/users/${browserData.id}`, requestOptions);
+    const response = await fetch(`${process.env.REACT_APP_HOST}/600/users/${browserData.tbid}`, requestOptions);
     if(!response.ok){
         throw { message: response.statusText, status: response.status }; //eslint-disable-line
     }
@@ -30,7 +30,7 @@ export async function getUserOrders(){
         headers: {"Content-Type": "application/json", Authorization: `Bearer ${browserData.token}`}
     }
 
-    const response = await fetch(`${process.env.REACT_APP_HOST}/660/orders?users.id=${browserData.id}`, requestOptions );
+    const response = await fetch(`${process.env.REACT_APP_HOST}/660/orders?users.id=${browserData.tbid}`, requestOptions );
     if(!response.ok){
         throw { message: response.statusText, status: response.status }; //eslint-disable-line
     }
