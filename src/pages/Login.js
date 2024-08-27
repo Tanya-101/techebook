@@ -29,13 +29,13 @@ export const Login = () => {
 
     }
 
-    async function handleLoginGuest() {
-        email.current.value = process.env.REACT_APP_GUEST_LOGIN;
-        password.current.value = process.env.REACT_APP_GUEST_PASSWORD;
+    // async function handleLoginGuest() {
+    //     email.current.value = process.env.REACT_APP_GUEST_LOGIN;
+    //     password.current.value = process.env.REACT_APP_GUEST_PASSWORD;
 
-        const data = await login();
-        data.accessToken ? Navigate("/products") : toast.error(data);
-    }
+    //     const data = await login();
+    //     data.accessToken ? Navigate("/products") : toast.error(data);
+    // }
 
     return (
         <main className="dark:bg-slate-800">
